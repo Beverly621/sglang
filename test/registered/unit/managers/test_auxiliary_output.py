@@ -619,6 +619,7 @@ def test_disaggregated_prefill_consumes_auxiliary_output_after_commit():
 
     assert req.output_ids == [7]
     scheduler.cache_unfinished_disagg_prefill.assert_called_once_with(req)
+    copy_done.synchronize.assert_called_once_with()
     snapshot_auxiliary_output_starts.assert_called_once_with(batch, result)
     processor.consume_auxiliary_output.assert_called_once_with(
         batch,
